@@ -1,8 +1,9 @@
 import Head from "next/head";
-import FileSelector from "../components/FileSelector";
+
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
+
   return (
     <div className={styles.container}>
       <link
@@ -18,7 +19,14 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <FileSelector />
+        <h1>Send a POST request to:</h1>
+        <h2>
+          <a href="/api/file" target="_blank" rel="noopener noreferrer">/api/file</a>
+        </h2>
+        <h3>
+          Send the file as form data in the part of the body with the
+          Content-Type as "multipart/form-data".
+        </h3>
       </main>
     </div>
   );

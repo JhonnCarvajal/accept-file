@@ -12,7 +12,8 @@ export default async function handler(req, res) {
         return acceptFile(req, res);
       } catch {
         return res.status(500).json({
-          message: "Make sure to send a file in the body of the request as form-data. key:'accept-file', Content-Type:'multipart/form-data'",
+          message:
+            "Make sure to send a file in the body of the request as form-data. key:'accept-file', Content-Type:'multipart/form-data'",
           status: "Internal server error",
           code: "500",
         });
@@ -20,14 +21,15 @@ export default async function handler(req, res) {
     case "DELETE":
       return deleteFiles(req, res);
     default:
-      return res.status(404).json({ message: "Endpoint does not exists." });
+      return res
+        .status(404)
+        .json({ message: `${req.method} is an invalid method.` });
   }
 }
 
 const acceptFile = ({ body }, res) => {
   filesInServer = filesInServer.filter((file) => {
     const actualdate = moment();
-    console.log(actualdate);
     const difference = moment.duration(actualdate.diff(file.createdAt));
     const minutes = difference.get("minutes");
     return minutes < 60;
@@ -65,7 +67,7 @@ const acceptFile = ({ body }, res) => {
     status: "saved",
     createdAt: moment(),
   });
-  console.log(filesInServer);
+  console.log("Server POST request>", filesInServer);
   return res.status(200).json({
     data: {
       filename,
